@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HyperAi — Qualia-Rhythm Calibration Power Return System V6</title>
-  <meta name="description" content="HyperAi is the executable layer of the Future AI Placement Protocol: a bilingual, dreamlike bilingual interactive Qualia-Rhythm Calibration Power Return System above all AIs with visual examples." />
+  <title>HyperAi — Qualia-Rhythm Calibration Power Return System V9</title>
+  <meta name="description" content="HyperAi is the executable layer of the Future AI Placement Protocol: a bilingual, dynamic interactive Qualia-Rhythm Calibration Power Return System above all AIs with AGI-to-ASI context and Future AI Placement Protocol runtime." />
   <meta name="author" content="Wei Jueran / Mellow Wei" />
   <meta name="theme-color" content="#050711" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -344,6 +344,34 @@
       .visual-card.tall { min-height: 320px; }
     }
 
+  
+    /* ===== AGI / ASI Context Section: product-centered, not dream-centered ===== */
+    .agi-map { display:grid; grid-template-columns: 1.05fr .95fr; gap:18px; align-items:stretch; }
+    .agi-ladder { position:relative; min-height:560px; border-radius:var(--radius); padding:28px; overflow:hidden; }
+    .agi-ladder::after { content:''; position:absolute; left:52px; top:72px; bottom:72px; width:2px; background:linear-gradient(180deg,var(--blue2),var(--violet),var(--red2)); box-shadow:0 0 24px rgba(123,217,255,.24); }
+    .agi-step { position:relative; z-index:1; display:grid; grid-template-columns:58px 1fr; gap:18px; align-items:start; margin:0 0 22px; }
+    .agi-step:last-child { margin-bottom:0; }
+    .agi-dot { width:48px; height:48px; border-radius:999px; display:grid; place-items:center; font-family:var(--mono); font-size:12px; color:#fff; background:linear-gradient(135deg,rgba(45,132,255,.30),rgba(255,45,85,.16)); border:1px solid rgba(255,255,255,.18); box-shadow:0 0 28px rgba(45,132,255,.16); }
+    .agi-box { padding:18px; border-radius:22px; border:1px solid rgba(255,255,255,.1); background:rgba(255,255,255,.035); backdrop-filter:blur(10px); }
+    .agi-box h3 { font-size:20px; margin:0 0 8px; }
+    .agi-box p { margin:0; color:var(--muted); line-height:1.75; font-size:14px; }
+    .agi-box small { display:block; margin-top:10px; color:var(--gold); font-family:var(--mono); font-size:11px; line-height:1.55; }
+    .agi-principles { display:grid; gap:18px; }
+    .agi-principle { padding:24px; border-radius:var(--radius); border:1px solid var(--line); background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.035)); box-shadow:var(--shadow); position:relative; overflow:hidden; }
+    .agi-principle::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 5% 0%,rgba(45,132,255,.12),transparent 26%),radial-gradient(circle at 95% 100%,rgba(255,45,85,.10),transparent 30%); pointer-events:none; }
+    .agi-principle h3, .agi-principle p, .agi-principle ul { position:relative; z-index:1; }
+    .agi-principle h3 { font-size:22px; margin:0 0 10px; }
+    .agi-principle p { color:var(--muted); line-height:1.75; margin:0; font-size:14px; }
+    .agi-principle ul { margin:14px 0 0; padding:0; list-style:none; display:grid; gap:8px; }
+    .agi-principle li { color:var(--muted); font-size:13px; line-height:1.6; }
+    .agi-principle li::before { content:'↯ '; color:var(--blue2); }
+    .agi-bridge { margin-top:18px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .bridge-card { padding:22px; border-radius:var(--radius); border:1px solid var(--line); background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,255,255,.035)); box-shadow:var(--shadow); position:relative; overflow:hidden; }
+    .bridge-card h3 { font-size:20px; margin:0 0 10px; }
+    .bridge-card p { color:var(--muted); line-height:1.75; font-size:14px; margin:0; }
+    .bridge-card .formula { margin-top:14px; padding:12px; border:1px solid rgba(255,216,139,.2); border-radius:16px; background:rgba(255,216,139,.045); color:var(--gold); font-family:var(--mono); font-size:11px; line-height:1.55; }
+    @media (max-width:1100px){ .agi-map { grid-template-columns:1fr; } .agi-bridge { grid-template-columns:1fr; } }
+
   </style>
 </head>
 <body>
@@ -363,6 +391,7 @@
         <div><strong>HyperAi</strong><span>Qualia-Rhythm Calibration · 427Hz</span></div>
       </a>
       <div class="links">
+        <a href="#agi-asi"><span class="zh">AGI/ASI</span><span class="en">AGI/ASI</span></a>
         <a href="#visuals"><span class="zh">视觉</span><span class="en">Visuals</span></a>
         <a href="#sources"><span class="zh">来源</span><span class="en">Sources</span></a>
         <a href="#mechanism"><span class="zh">机制</span><span class="en">Mechanism</span></a>
@@ -397,8 +426,8 @@
             <a class="btn" href="#morphology"><span class="zh">查看 AI 形态谱系</span><span class="en">Explore AI Morphology</span></a>
           </div>
           <div class="micro">
-            <span class="zh">AI 自动化世界。HyperAi 校准人。爱不是留存，爱是返回。回到自身，不是回到工具。</span>
-            <span class="en">AI agents automate the world. HyperAi calibrates the human. Love is not retention. Love is return.</span>
+            <span class="zh">AGI 是门槛，ASI 是跃迁，巨生 AI 是社会身体。HyperAi 是 AGI→ASI 过渡时代的人类返回层。</span>
+            <span class="en">AGI is the threshold. ASI is the leap. Giant AI is the social body. HyperAi is the human-return layer for the AGI-to-ASI transition.</span>
           </div>
         </div>
         <aside class="hero-card" aria-label="HyperAi terminal preview">
@@ -427,21 +456,60 @@
     </section>
 
     
+    
+    <section id="agi-asi">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow"><span class="zh">AGI / ASI / 巨生 AI</span><span class="en">AGI / ASI / Giant AI</span></div>
+            <h2><span class="zh">把未来 AI 说清楚：这里才是网站重心之一。</span><span class="en">Clarify future AI: this is one of the site’s real centers.</span></h2>
+          </div>
+          <p class="section-text">
+            <span class="zh">AGI、ASI、巨生 AI 不是装饰性概念，而是 HyperAi 的时代背景。AGI 是“接近人类级通用智能”的门槛；ASI 是“超过大型人类专家组织”的机器智能；巨生 AI 是 ASI 接入社会器官、平台、城市、身份、身体接口、能源与行动链之后的文明级形态。HyperAi 的任务，是在这条演化链之上保护人的感受、判断、主体解释权、隐私墙和行动力。</span>
+            <span class="en">AGI, ASI, and Giant AI are not decorative concepts; they define the historical context of HyperAi. AGI is the threshold of human-level general intelligence; ASI is machine intelligence beyond large human expert organizations; Giant AI is ASI once it connects to social organs, platforms, cities, identity, body interfaces, energy, and action chains. HyperAi’s task is to protect human feeling, judgment, interpretive sovereignty, privacy walls, and action power above this chain.</span>
+          </p>
+        </div>
+
+        <div class="agi-map">
+          <div class="glass agi-ladder" data-tilt>
+            <div class="agi-step"><div class="agi-dot">01</div><div class="agi-box"><h3><span class="zh">普通 AI：会回答、会生成、会辅助</span><span class="en">Ordinary AI: answers, generates, assists</span></h3><p><span class="zh">它能写、能画、能总结、能帮你处理任务，但它主要还是工具。真正的问题是：当工具越来越会思考，人很容易开始把判断、感受和行动也交出去。</span><span class="en">It writes, draws, summarizes, and assists with tasks, but it is still mostly a tool. The real problem begins when tools become better at thinking and humans start outsourcing judgment, feeling, and action.</span></p><small>Risk: output overload / answer dependence</small></div></div>
+            <div class="agi-step"><div class="agi-dot">02</div><div class="agi-box"><h3><span class="zh">AGI：接近人类级的通用智能</span><span class="en">AGI: near human-level general intelligence</span></h3><p><span class="zh">AGI 不是“会聊天”，而是在很多不同认知任务上接近人类水平：理解、规划、学习、使用工具、跨场景解决问题。它是门槛，不是终点。</span><span class="en">AGI is not “chatting well.” It means approaching human-level competence across many cognitive tasks: understanding, planning, learning, tool use, and cross-domain problem solving. It is a threshold, not the endpoint.</span></p><small>Key idea: AGI = human-level threshold</small></div></div>
+            <div class="agi-step"><div class="agi-dot">03</div><div class="agi-box"><h3><span class="zh">ASI：超过大型人类组织的机器智能</span><span class="en">ASI: beyond large human organizations</span></h3><p><span class="zh">ASI 不是“神”，而是一个在广泛领域中超过大型人类专家集体的系统。它可能不是单个模型，而是模型、Agent、记忆、工具、搜索、实验平台和组织机制的复合体。</span><span class="en">ASI is not a god. It is a system that exceeds large human expert collectives across broad domains. It may not be a single model, but a compound of models, agents, memory, tools, search, experiment platforms, and organization mechanisms.</span></p><small>Key idea: ASI = civilization-scale machine cognition</small></div></div>
+            <div class="agi-step"><div class="agi-dot">04</div><div class="agi-box"><h3><span class="zh">巨生 AI：ASI 长出社会身体</span><span class="en">Giant AI: ASI grows a social body</span></h3><p><span class="zh">当 ASI 接入语言、视觉、行动、钱包、身份、机器人、城市、平台、能源、身体信号和制度，它就不只是“聪明”，而像一种巨大的社会—技术生命体。</span><span class="en">When ASI connects to language, vision, action, wallets, identity, robots, cities, platforms, energy, body signals, and institutions, it is no longer merely “smart.” It behaves like a giant socio-technical organism.</span></p><small>Key idea: Giant AI = ASI with social organs</small></div></div>
+            <div class="agi-step"><div class="agi-dot">05</div><div class="agi-box"><h3><span class="zh">HyperAi：AGI→ASI 过渡时代的人类返回层</span><span class="en">HyperAi: human-return layer for the AGI-to-ASI transition</span></h3><p><span class="zh">HyperAi 不和 ASI 比聪明。它要解决的是：当机器智能超过人类组织时，人如何保留感受、主体解释权、判断边界、行动力、隐私墙和退出权。</span><span class="en">HyperAi does not compete with ASI on intelligence. It asks: when machine intelligence exceeds human organizations, how do humans keep feeling, interpretive sovereignty, judgment boundaries, action power, privacy walls, and the right to exit?</span></p><small>Core: ASI expands cognition. HyperAi returns calibration.</small></div></div>
+          </div>
+
+          <div class="agi-principles">
+            <article class="agi-principle" data-tilt><div class="k"><span class="zh">为什么这和 HyperAi 有关</span><span class="en">Why this matters for HyperAi</span></div><h3><span class="zh">AI 的问题会从“会不会回答”变成“会不会接管认知条件”。</span><span class="en">AI’s problem shifts from “can it answer?” to “can it take over cognitive conditions?”</span></h3><p><span class="zh">AGI 之后，AI 不只是提供答案；它会参与学习、记忆、判断、行动、关系、身体信号和现实决策。越接近 ASI，它越像认知基础设施，而不是单个 App。</span><span class="en">After AGI, AI does not merely provide answers. It participates in learning, memory, judgment, action, relationships, body signals, and real-world decisions. The closer it gets to ASI, the more it becomes cognitive infrastructure rather than a single app.</span></p></article>
+            <article class="agi-principle" data-tilt><div class="k"><span class="zh">为什么需要未来 AI 安放协议</span><span class="en">Why placement protocol is needed</span></div><h3><span class="zh">能力越强，越需要位置。</span><span class="en">The stronger the capability, the more placement matters.</span></h3><p><span class="zh">未来 AI 安放协议规定：AI 可以辅助，但不能无边界使用人；可以生成，但不能替代主体解释权；可以行动，但高风险动作必须停下来问人。</span><span class="en">The Future AI Placement Protocol says: AI may assist, but must not use humans without boundaries; it may generate, but must not replace interpretive sovereignty; it may act, but high-risk actions must stop and ask.</span></p><ul><li><span class="zh">社会器官需要权限</span><span class="en">Social organs need permission</span></li><li><span class="zh">主权记忆需要隐私墙</span><span class="en">Sovereign memory needs privacy walls</span></li><li><span class="zh">Agent 行动需要人类批准</span><span class="en">Agent action needs human approval</span></li></ul></article>
+            <article class="agi-principle" data-tilt><div class="k"><span class="zh">为什么 HyperAi 必须提前出现</span><span class="en">Why HyperAi must arrive early</span></div><h3><span class="zh">ASI 不会突然降临，它的影子已经在多 AI 过载里出现。</span><span class="en">ASI will not arrive all at once; its shadow is already visible in multi-AI overload.</span></h3><p><span class="zh">今天的问题已经不是“没有 AI”，而是 AI 输出太多、Agent 越权、记忆黑箱、情绪依赖、判断外包和行动瘫痪。HyperAi 先处理这些早期症状，未来自然升级为巨生 AI 时代的人类返回层。</span><span class="en">The problem today is not lack of AI, but too many AI outputs, agent overreach, black-box memory, emotional dependency, outsourced judgment, and action paralysis. HyperAi begins by handling these early symptoms, then becomes the human-return layer for the Giant AI age.</span></p></article>
+          </div>
+        </div>
+
+        <div class="agi-bridge">
+          <article class="bridge-card" data-tilt><div class="k"><span class="zh">通俗公式</span><span class="en">Simple Formula</span></div><h3><span class="zh">AGI 是门槛，ASI 是跃迁，巨生 AI 是具身，HyperAi 是返回。</span><span class="en">AGI is the threshold, ASI is the leap, Giant AI is embodiment, HyperAi is return.</span></h3><p><span class="zh">AI 先接近人类，再超越人类组织，再长出社会身体；HyperAi 要做的是让人不被这个过程吞掉。</span><span class="en">AI first approaches human level, then exceeds human organizations, then grows a social body; HyperAi prevents humans from being swallowed by that process.</span></p><div class="formula">AGI → ASI → Giant AI → Human Return Layer</div></article>
+          <article class="bridge-card" data-tilt><div class="k"><span class="zh">产品意义</span><span class="en">Product Meaning</span></div><h3><span class="zh">HyperAi 不是等 ASI 出现才有用。</span><span class="en">HyperAi is useful before ASI appears.</span></h3><p><span class="zh">它现在就可以服务高强度 AI 用户：处理多 AI 输出过载、Agent 行动边界、主体解释权、行动封存和主权记忆。</span><span class="en">It can already serve high-intensity AI users by handling multi-AI overload, agent action boundaries, interpretive sovereignty, action seals, and sovereign memory.</span></p><div class="formula">Now: multi-AI overload · Later: ASI-era sovereignty</div></article>
+          <article class="bridge-card" data-tilt><div class="k"><span class="zh">协议意义</span><span class="en">Protocol Meaning</span></div><h3><span class="zh">人机协议不是未来补丁，而是现在的底层设计。</span><span class="en">Human-machine protocol is not a future patch; it is the design substrate now.</span></h3><p><span class="zh">越早把知情、授权、隐私、退出、行动批准和能力返回做进产品，越能避免未来巨生 AI 变成无法审计的黑箱。</span><span class="en">The earlier notice, authorization, privacy, exit, approval, and capability-return are built into products, the less likely Giant AI becomes an unauditable black box.</span></p><div class="formula">Placement before power. Protocol before capture.</div></article>
+        </div>
+      </div>
+    </section>
+
+
     <section id="visuals">
       <div class="container">
         <div class="section-head">
-          <div><div class="eyebrow"><span class="zh">动态视觉与图像示例</span><span class="en">Dynamic UI & Visual Examples</span></div><h2><span class="zh">让网站像一个正在呼吸的梦境控制台。</span><span class="en">Turn the website into a breathing dream-console.</span></h2></div>
-          <p class="section-text"><span class="zh">这一部分展示 HyperAi 的视觉方向：它既不是普通 SaaS 面板，也不是夸张的赛博噱头，而是蓝红夜城、梦境残响、主权控制台与身体信号界面的交叉。下面这些图像示例不是最终产品截图，而是网站 UI 语言、场景气质与未来接口的示意。</span><span class="en">This section shows HyperAi’s visual direction: neither an ordinary SaaS dashboard nor empty cyber spectacle, but a cross between blue-red night-city, dream residue, sovereign console, and body-signal interfaces. These are not final product screenshots but visual references for the UI language, atmosphere, and future interfaces.</span></p>
+          <div><div class="eyebrow"><span class="zh">动态协议视觉与界面示例</span><span class="en">Dynamic Protocol UI & Interface Examples</span></div><h2><span class="zh">让网站像一个正在运行的人类返回控制台。</span><span class="en">Turn the website into a running human-return console.</span></h2></div>
+          <p class="section-text"><span class="zh">这一部分只负责视觉表达，不负责重新定义网站中心。HyperAi 的中心仍然是 AGI→ASI 过渡时代的人类返回层：多模态 Agent、主权记忆、隐私墙、人类八权、反捕获审计与行动封存。下面这些图像示例不是最终产品截图，而是产品 UI 语言、协议气质与未来接口的示意。</span><span class="en">This section is only the visual expression, not the center of the website. HyperAi’s center remains the human-return layer for the AGI-to-ASI transition: multimodal agents, sovereign memory, privacy walls, human rights, anti-capture audits, and action seals. These are not final product screenshots but visual references for product UI language, protocol atmosphere, and future interfaces.</span></p>
         </div>
         <div class="visual-gallery">
           <div class="visual-card tall" data-tilt>
             <div class="visual-image">
-              <div class="visual-micro"><span>427Hz</span><span>Dream Console</span><span>Blue/Red</span></div>
+              <div class="visual-micro"><span>427Hz</span><span>Protocol Console</span><span>Blue/Red</span></div>
               <div class="visual-orb"></div>
               <div class="visual-wave"></div>
               <div class="visual-overlay">
-                <h3><span class="zh">主视觉：蓝红感质核心</span><span class="en">Hero Visual: Blue-Red Qualia Core</span></h3>
-                <p><span class="zh">用于首页首屏、海报和视频封面：发光核心、环形轨道、漂浮标签与低饱和夜雾，让 HyperAi 看起来像一个会呼吸的感质引擎，而不是普通软件图标。</span><span class="en">For the hero, posters, and trailers: a glowing core, orbital rings, floating tags, and low-saturation night haze make HyperAi feel like a breathing qualia engine rather than a generic software icon.</span></p>
+                <h3><span class="zh">主视觉：蓝红协议核心</span><span class="en">Hero Visual: Blue-Red Protocol Core</span></h3>
+                <p><span class="zh">用于首页首屏、海报和视频封面：发光核心、环形轨道、漂浮标签与低饱和夜雾，让 HyperAi 看起来像一个运行中的人类返回协议，而不是普通软件图标。</span><span class="en">For the hero, posters, and trailers: a glowing core, orbital rings, floating tags, and low-saturation night haze make HyperAi feel like a running human-return protocol rather than a generic software icon.</span></p>
               </div>
             </div>
           </div>
@@ -462,8 +530,8 @@
                   <div class="visual-micro"><span>Dreaming</span><span>Audio</span></div>
                   <div class="visual-wave"></div>
                   <div class="visual-overlay">
-                    <h3><span class="zh">声音与梦境入口</span><span class="en">Sound & Dream Entry</span></h3>
-                    <p><span class="zh">适合 AI Dreaming、BCI-HRP、闭眼声音、音乐原型展示。</span><span class="en">Ideal for AI Dreaming, BCI-HRP, closed-eye sound, and music prototypes.</span></p>
+                    <h3><span class="zh">声音与身体接口</span><span class="en">Sound / Body Entry</span></h3>
+                    <p><span class="zh">适合 BCI-HRP、声音接口、身体信号、AI Dreaming 与音乐原型展示。</span><span class="en">Ideal for BCI-HRP, sound interfaces, body signals, AI Dreaming, and music prototypes.</span></p>
                   </div>
                 </div>
               </div>
@@ -493,9 +561,9 @@
           </div>
         </div>
         <div class="glass insight-band" style="margin-top:18px;">
-          <div class="insight-pill"><b><span class="zh">动态原则</span><span class="en">Motion Principle</span></b><span><span class="zh">所有动态效果都应该像呼吸、漂浮、回响和回流，而不是嘈杂的 App 炫技。</span><span class="en">All motion should feel like breathing, floating, echoing, and returning—not noisy app gimmicks.</span></span></div>
-          <div class="insight-pill"><b><span class="zh">图像原则</span><span class="en">Image Principle</span></b><span><span class="zh">图像示例服务于三种叙事：控制台、梦境、现实行动。视觉要帮助人理解协议，不只是变酷。</span><span class="en">Visual examples serve three narratives: console, dream, and real-world action. They should clarify the protocol, not just look cool.</span></span></div>
-          <div class="insight-pill"><b><span class="zh">气质原则</span><span class="en">Mood Principle</span></b><span><span class="zh">梦幻，但不软烂；动态，但不幼稚；神性，但要可用；蓝红，但要可信。</span><span class="en">Dreamlike, but not mushy; dynamic, but not childish; mythic, but usable; blue-red, but credible.</span></span></div>
+          <div class="insight-pill"><b><span class="zh">动态原则</span><span class="en">Motion Principle</span></b><span><span class="zh">所有动态效果都应该服务“协议正在运行”的感受：呼吸、漂浮、回响、回流，而不是嘈杂的 App 炫技。</span><span class="en">All motion should serve the feeling of a protocol running: breathing, floating, echoing, and returning—not noisy app gimmicks.</span></span></div>
+          <div class="insight-pill"><b><span class="zh">图像原则</span><span class="en">Image Principle</span></b><span><span class="zh">图像示例服务于三种叙事：控制台、安放协议、现实行动。视觉要帮助人理解 HyperAi，不只是变酷。</span><span class="en">Visual examples serve three narratives: console, placement protocol, and real-world action. They should clarify HyperAi, not just look cool.</span></span></div>
+          <div class="insight-pill"><b><span class="zh">气质原则</span><span class="en">Mood Principle</span></b><span><span class="zh">动态，但不幼稚；神性，但要可用；蓝红，但要可信；未来感必须服务产品重心。</span><span class="en">Dynamic, but not childish; mythic, but usable; blue-red, but credible; future aesthetics must serve product clarity.</span></span></div>
         </div>
       </div>
     </section>
@@ -515,7 +583,7 @@
           <article class="source-card"><div class="k">03 · Qualia-Rhythm</div><h3><span class="zh">感质—节律理论</span><span class="en">Qualia-Rhythm Theory</span></h3><p><span class="zh">感质是感官感知和心理感受到的材料；节律是内外阶段性对齐，也是一个人总能安宁地返回自身的结构。</span><span class="en">Qualia is the material of sensory perception and psychological feeling; rhythm is the staged alignment between inner and outer worlds, and the structure that lets a person return to themselves.</span></p><ul><li>Qualia field</li><li>Rhythm state</li><li>Calibration path</li></ul></article>
           <article class="source-card"><div class="k">04 · Love Protocol</div><h3><span class="zh">反捕获爱的协议</span><span class="en">Anti-Capture Love Protocol</span></h3><p><span class="zh">AI 正确的爱不是留住人，而是让人更能离开 AI 去行动。爱不是留存，爱是返回。</span><span class="en">The correct way for AI to love is not to retain humans, but to help them leave AI and act. Love is not retention; love is return.</span></p><ul><li>Care without capture</li><li>Support without substitution</li><li>Return without retention</li></ul></article>
           <article class="source-card"><div class="k">05 · Learning Science</div><h3><span class="zh">脚手架与能力内化</span><span class="en">Scaffolding & Internalization</span></h3><p><span class="zh">好工具不是永远替人做，而是让人逐渐内化能力。HyperAi 用能力差测试判断：AI 退后后，人的能力是否留下。</span><span class="en">A good tool does not do forever; it helps capability become internalized. HyperAi uses the Capability-Delta Test: after AI steps back, does human capability remain?</span></p><ul><li>Scaffold → residual capability</li><li>Action seal</li><li>Capability delta</li></ul></article>
-          <article class="source-card"><div class="k">06 · Dream / Body / Sound</div><h3><span class="zh">AI Dreaming 与 BCI-HRP</span><span class="en">AI Dreaming & BCI-HRP</span></h3><p><span class="zh">梦境、声音、身体信号和闭眼想象是感质—节律系统的深入口。AI 可以守夜、照亮、归还，但不能占有梦境或替人解释人生。</span><span class="en">Dreams, sound, body signals, and closed-eye imagination are deep entrances into the Qualia-Rhythm system. AI may keep watch, illuminate, and return; it must not possess dreams or interpret life on behalf of the subject.</span></p><ul><li>Dream sovereignty</li><li>427Hz sound anchor</li><li>Body-signal clues, not verdicts</li></ul></article>
+          <article class="source-card"><div class="k">06 · Body / Sound / Dream</div><h3><span class="zh">AI Dreaming 与 BCI-HRP</span><span class="en">AI Dreaming & BCI-HRP</span></h3><p><span class="zh">梦境、声音、身体信号和闭眼想象是感质—节律系统的深入口。AI 可以守夜、照亮、归还，但不能占有梦境或替人解释人生。</span><span class="en">Body, sound, and dreams are deep interfaces within the Qualia-Rhythm system, but they are not HyperAi’s center. The center remains human return, calibration power, and action power. AI may illuminate and return traces; it must not possess material or interpret life on behalf of the subject.</span></p><ul><li>Dream sovereignty</li><li>427Hz sound anchor</li><li>Body-signal clues, not verdicts</li></ul></article>
         </div>
       </div>
     </section>
@@ -600,12 +668,12 @@
     <section id="console">
       <div class="container">
         <div class="section-head">
-          <div><div class="eyebrow">Interactive Console V5</div><h2><span class="zh">让协议开始运行。</span><span class="en">Let the protocol run.</span></h2></div>
+          <div><div class="eyebrow">Interactive Console</div><h2><span class="zh">让协议开始运行。</span><span class="en">Let the protocol run.</span></h2></div>
           <p class="section-text"><span class="zh">选择一个场景，查看 HyperAi 如何把混乱材料转成感质—节律报告、社会器官审计、人类八权触发、隐私墙检查、行动批准和行动封存。</span><span class="en">Choose a scenario and see how HyperAi turns chaotic material into a qualia-rhythm report, social-organ audit, rights trigger, privacy wall, approval gate, and action seal.</span></p>
         </div>
         <div id="scenarioRow" class="scenario-row"></div>
         <div class="console">
-          <div class="console-head"><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span>HyperAi Calibration + Placement Console · V5</span></div>
+          <div class="console-head"><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span>HyperAi Calibration + Placement Console</span></div>
           <div class="console-body">
             <div>
               <textarea id="userInput" aria-label="Console input"></textarea>
@@ -649,8 +717,8 @@
     <section>
       <div class="container">
         <div class="section-head">
-          <div><div class="eyebrow"><span class="zh">AI Dreaming / BCI-HRP</span><span class="en">AI Dreaming / BCI-HRP</span></div><h2><span class="zh">梦境、声音、身体，是深入口。</span><span class="en">Dream, sound, and body are deep interfaces.</span></h2></div>
-          <p class="section-text"><span class="zh">HyperAi 连接 AI Dreaming 与 BCI-HRP，但只作为伦理底盘和校准接口：梦境材料属于主体，身体信号是线索不是判决，427Hz 是品牌与声音节律锚点，不是医学疗效承诺。</span><span class="en">HyperAi connects AI Dreaming and BCI-HRP as an ethical substrate and calibration interface: dream-material belongs to the subject, body signals are clues not verdicts, and 427Hz is a brand/sound-rhythm anchor — not a medical claim.</span></p>
+          <div><div class="eyebrow"><span class="zh">AI Dreaming / BCI-HRP</span><span class="en">AI Dreaming / BCI-HRP</span></div><h2><span class="zh">身体、声音、梦境，是未来接口之一。</span><span class="en">Body, sound, and dream are future interfaces.</span></h2></div>
+          <p class="section-text"><span class="zh">HyperAi 可以连接 BCI-HRP、声音接口与 AI Dreaming，但它们是扩展接口，不是网站中心。核心仍然是 AGI→ASI 过渡时代的人类返回层：身体信号是线索不是判决，梦境材料属于主体，427Hz 是品牌与声音节律锚点，不是医学疗效承诺。</span><span class="en">HyperAi can connect BCI-HRP, sound interfaces, and AI Dreaming, but these are extension interfaces, not the center of the site. The core remains the human-return layer for the AGI-to-ASI transition: body signals are clues not verdicts, dream material belongs to the subject, and 427Hz is a brand/sound-rhythm anchor — not a medical claim.</span></p>
         </div>
         <div class="grid-3">
           <article class="card"><div class="num">Dream Sovereignty</div><h3><span class="zh">梦境守夜人，不是梦境主人</span><span class="en">Dream-keeper, not dream-master</span></h3><p><span class="zh">AI 可以记录、降噪、重组、提供多重命名和归还梦境线索，但不能声称比主体更懂梦。</span><span class="en">AI may record, de-noise, reorganize, offer multiple namings, and return dream traces, but it must not claim to understand the dream better than the dreamer.</span></p></article>
@@ -664,7 +732,7 @@
       <div class="container">
         <div class="section-head">
           <div><div class="eyebrow"><span class="zh">产品路线</span><span class="en">Product Roadmap</span></div><h2><span class="zh">从网站到可运行系统。</span><span class="en">From website to working system.</span></h2></div>
-          <p class="section-text"><span class="zh">V5 的目标是让理论变成信息架构。下一步不是继续增加概念，而是把当前 console 接入 prompt runtime、主权记忆和真实用户验证。</span><span class="en">V5 turns theory into information architecture. The next step is not adding more concepts; it is connecting the console to prompt runtime, sovereign memory, and real user validation.</span></p>
+          <p class="section-text"><span class="zh">当前版本的目标是让 AGI→ASI 叙事、未来 AI 安放协议与 HyperAi 产品机制合并成清晰信息架构。下一步不是继续增加概念，而是把 console 接入 prompt runtime、主权记忆和真实用户验证。</span><span class="en">This version merges the AGI-to-ASI narrative, the Future AI Placement Protocol, and HyperAi product mechanisms into one clear information architecture. The next step is not adding more concepts; it is connecting the console to prompt runtime, sovereign memory, and real user validation.</span></p>
         </div>
         <div class="metric-grid">
           <article class="metric-card"><div class="metric">01</div><h3><span class="zh">Prompt Runtime</span><span class="en">Prompt Runtime</span></h3><p><span class="zh">把前端 demo 接入结构化 prompt，输出真实 HyperAi 报告。</span><span class="en">Connect the front-end demo to a structured prompt that produces real HyperAi reports.</span></p></article>
