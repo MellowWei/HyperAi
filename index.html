@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HyperAi — Interactive Placement Console V4</title>
+  <meta name="description" content="HyperAi is the executable layer of the Future AI Placement Protocol: an interactive Qualia-Rhythm Calibration Power Return System above all AIs." />
+  <meta name="author" content="Wei Jueran / Mellow Wei" />
+  <meta name="theme-color" content="#050711" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03050e;
+      --bg2: #070b18;
+      --panel: rgba(255,255,255,.066);
+      --panel2: rgba(255,255,255,.105);
+      --line: rgba(255,255,255,.135);
+      --line2: rgba(255,255,255,.22);
+      --text: #f8f9ff;
+      --muted: rgba(248,249,255,.72);
+      --faint: rgba(248,249,255,.48);
+      --blue: #2d84ff;
+      --blue2: #7bd9ff;
+      --red: #ff2d55;
+      --red2: #ff8da1;
+      --violet: #8b6bff;
+      --green: #72ffd0;
+      --gold: #ffd782;
+      --radius: 28px;
+      --max: 1220px;
+      --mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      --sans: 'Inter', 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --shadow: 0 0 34px rgba(45,132,255,.22), 0 0 52px rgba(255,45,85,.15);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 15% 6%, rgba(45,132,255,.25), transparent 28%),
+        radial-gradient(circle at 82% 9%, rgba(255,45,85,.18), transparent 27%),
+        radial-gradient(circle at 52% 74%, rgba(139,107,255,.15), transparent 38%),
+        linear-gradient(180deg, #03050e 0%, #070a15 45%, #03050e 100%);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+      background-image:
+        linear-gradient(rgba(255,255,255,.034) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 82%);
+      opacity: .58;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background:
+        linear-gradient(120deg, rgba(45,132,255,.06), transparent 30%, rgba(255,45,85,.06)),
+        repeating-linear-gradient(180deg, transparent 0 7px, rgba(255,255,255,.018) 8px);
+      mix-blend-mode: screen;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 60;
+      backdrop-filter: blur(22px) saturate(1.4);
+      background: rgba(3,5,14,.76);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 220px; }
+    .mark {
+      width: 42px; height: 42px; border-radius: 999px;
+      background: conic-gradient(from 210deg, var(--blue), var(--red), var(--violet), var(--blue));
+      box-shadow: var(--shadow); position: relative;
+    }
+    .mark::after { content: 'H'; position: absolute; inset: 6px; display: grid; place-items: center; border-radius: inherit; background: #050711; color: var(--blue2); font-weight: 900; }
+    .brand strong { display:block; letter-spacing:.02em; }
+    .brand span { display:block; color: var(--faint); font-family: var(--mono); font-size: 11px; margin-top: 3px; }
+    .links { display: flex; gap: 18px; align-items: center; color: var(--muted); font-size: 13px; }
+    .links a:hover { color: var(--text); text-shadow: 0 0 18px rgba(123,217,255,.6); }
+    .nav-cta { padding: 10px 14px; border: 1px solid rgba(123,217,255,.35); border-radius: 999px; color: var(--text); background: rgba(45,132,255,.10); }
+    .ritual {
+      display:inline-flex; align-items:center; gap: 10px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--blue2); padding: 9px 12px; border: 1px solid rgba(123,217,255,.28); border-radius: 999px;
+      background: rgba(45,132,255,.08); box-shadow: inset 0 0 18px rgba(45,132,255,.08);
+    }
+    .pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--red); box-shadow: 0 0 18px var(--red); animation: pulse 1.8s infinite alternate; }
+    @keyframes pulse { from { opacity:.45; transform: scale(.9); } to { opacity:1; transform: scale(1.22); } }
+    .hero { padding: 92px 0 58px; }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; gap: 34px; align-items: center; }
+    h1 { margin: 22px 0 18px; font-size: clamp(52px, 7.4vw, 104px); line-height: .95; letter-spacing: -.055em; }
+    .gradient { background: linear-gradient(100deg, #fff 4%, var(--blue2) 34%, var(--red2) 72%, #fff 100%); -webkit-background-clip:text; color:transparent; text-shadow: 0 0 42px rgba(45,132,255,.18); }
+    .subtitle { font-size: clamp(18px, 2vw, 24px); line-height: 1.65; color: var(--muted); max-width: 740px; margin: 0; }
+    .subtitle strong { color: #fff; }
+    .hero-actions { display:flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { cursor: pointer; display:inline-flex; align-items:center; justify-content:center; gap: 8px; min-height: 46px; padding: 12px 18px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.045); color: var(--text); transition: .22s ease; }
+    .btn.primary { background: linear-gradient(135deg, rgba(45,132,255,.24), rgba(255,45,85,.12)); border-color: rgba(123,217,255,.42); box-shadow: var(--shadow); }
+    .btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.35); }
+    .micro { margin-top: 18px; color: var(--faint); font-family: var(--mono); font-size: 12px; line-height: 1.7; }
+    .hero-card, .glass, .card, .console, .quote, .layer, .mini-card, .panel, .runtime-node, .scenario-btn, .metric-card, .form-card {
+      border: 1px solid var(--line); background: linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+      border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(18px) saturate(1.25); position: relative; overflow: hidden;
+    }
+    .hero-card::before, .glass::before, .card::before, .console::before, .quote::before, .layer::before, .mini-card::before, .panel::before, .runtime-node::before, .metric-card::before, .form-card::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background: radial-gradient(circle at 14% 0%, rgba(45,132,255,.16), transparent 32%), radial-gradient(circle at 94% 100%, rgba(255,45,85,.14), transparent 35%);
+      opacity:.78;
+    }
+    .hero-card { padding: 24px; min-height: 520px; display: grid; align-content: space-between; }
+    .orbit-visual { min-height: 300px; border-radius: 24px; position: relative; overflow: hidden; background:
+      radial-gradient(circle at center, rgba(123,217,255,.16), transparent 34%),
+      radial-gradient(circle at 58% 50%, rgba(255,45,85,.13), transparent 38%),
+      rgba(0,0,0,.18); border: 1px solid rgba(255,255,255,.10); }
+    .orbit-visual::before, .orbit-visual::after { content:''; position:absolute; inset: 18%; border: 1px solid rgba(123,217,255,.38); border-left-color: transparent; border-right-color: transparent; border-radius:50%; transform: rotate(-14deg); box-shadow: 0 0 34px rgba(45,132,255,.20); }
+    .orbit-visual::after { inset: 24% 8%; border-color: rgba(255,45,85,.34); border-left-color: transparent; border-right-color: transparent; transform: rotate(18deg); }
+    .core-node { position:absolute; inset: 50% auto auto 50%; width: 120px; height: 120px; transform: translate(-50%,-50%); border-radius: 50%; background: conic-gradient(var(--blue), var(--red), var(--violet), var(--blue)); box-shadow: 0 0 70px rgba(45,132,255,.28), 0 0 70px rgba(255,45,85,.20); }
+    .core-node::after { content:'427Hz'; position:absolute; inset: 10px; display:grid; place-items:center; border-radius:inherit; background:#050711; color:#fff; font-family:var(--mono); font-size:14px; }
+    .terminal-line { position: relative; z-index:1; display:flex; justify-content: space-between; gap: 10px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.10); color: var(--muted); font-family: var(--mono); font-size: 12px; }
+    .terminal-line b { color: var(--text); font-weight:500; }
+    section { padding: 54px 0; scroll-margin-top: 90px; }
+    .section-head { display:grid; grid-template-columns: .78fr 1.22fr; gap: 32px; align-items: end; margin-bottom: 24px; }
+    .eyebrow { font-family: var(--mono); color: var(--blue2); text-transform: uppercase; letter-spacing: .16em; font-size: 12px; margin-bottom: 12px; }
+    h2 { margin:0; font-size: clamp(32px, 5vw, 66px); line-height: 1; letter-spacing: -.045em; }
+    .section-text { margin: 0; color: var(--muted); line-height: 1.8; font-size: 16px; }
+    .manifest { padding: 30px; display:grid; grid-template-columns: .9fr 1.1fr; gap: 24px; align-items:center; }
+    .manifest h2 { font-size: clamp(30px, 4vw, 56px); }
+    .manifest p { color: var(--muted); line-height:1.85; margin: 0; }
+    .badge-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .badge { padding: 14px; border:1px solid rgba(255,255,255,.13); border-radius: 18px; background: rgba(0,0,0,.15); font-family: var(--mono); color: var(--muted); font-size: 12px; }
+    .badge strong { display:block; color: var(--text); font-family:var(--sans); font-size: 15px; margin-bottom: 6px; }
+    .grid-2 { display:grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .grid-4 { display:grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .card, .mini-card { padding: 24px; }
+    .card h3, .mini-card h3, .metric-card h3 { position:relative; z-index:1; margin: 0 0 10px; font-size: 20px; }
+    .card p, .mini-card p, .metric-card p { position:relative; z-index:1; margin:0; color: var(--muted); line-height:1.75; font-size: 14px; }
+    .num { position:relative; z-index:1; display:inline-block; color: var(--red2); font-family: var(--mono); font-size: 12px; letter-spacing:.12em; text-transform: uppercase; margin-bottom: 14px; }
+    .mini-card { min-height: 190px; }
+    .mini-card .k { position:relative; z-index:1; font-family: var(--mono); font-size: 11px; color: var(--blue2); letter-spacing:.14em; text-transform: uppercase; margin-bottom: 12px; }
+    .mini-card:nth-child(even) .k { color: var(--red2); }
+    .runtime-map { display:grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .runtime-node { padding: 20px; min-height: 168px; }
+    .runtime-node h3 { position:relative; z-index:1; margin:0 0 10px; color: var(--blue2); font-size: 16px; }
+    .runtime-node:nth-child(even) h3 { color: var(--red2); }
+    .runtime-node p { position:relative; z-index:1; margin:0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .flow { display:grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .flow-step { padding: 20px; border-radius: 22px; border: 1px solid rgba(255,255,255,.13); background: rgba(255,255,255,.045); min-height: 176px; }
+    .flow-step h3 { margin:0 0 10px; color: var(--blue2); font-size: 16px; }
+    .flow-step:nth-child(even) h3 { color: var(--red2); }
+    .flow-step p { margin:0; color: var(--muted); line-height:1.65; font-size: 13px; }
+    .console { padding: 0; overflow:hidden; }
+    .console-head { display:flex; align-items:center; justify-content:space-between; padding: 16px 18px; border-bottom: 1px solid rgba(255,255,255,.12); font-family: var(--mono); font-size: 12px; color: var(--muted); }
+    .dots { display:flex; gap: 7px; }
+    .dot { width:10px; height:10px; border-radius:999px; background: var(--red); box-shadow: 0 0 14px rgba(255,45,85,.5); }
+    .dot:nth-child(2) { background: var(--gold); box-shadow: 0 0 14px rgba(255,215,130,.5); }
+    .dot:nth-child(3) { background: var(--blue2); box-shadow: 0 0 14px rgba(123,217,255,.5); }
+    .scenario-row { display:grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+    .scenario-btn { cursor:pointer; min-height: 108px; text-align:left; padding: 16px; color: var(--muted); transition: .2s ease; }
+    .scenario-btn strong { position:relative; z-index:1; display:block; color: var(--text); margin-bottom: 8px; font-size: 14px; }
+    .scenario-btn span { position:relative; z-index:1; font-size: 12px; line-height: 1.5; display:block; }
+    .scenario-btn.active { border-color: rgba(123,217,255,.6); transform: translateY(-2px); box-shadow: 0 0 34px rgba(45,132,255,.24), 0 0 44px rgba(255,45,85,.10); }
+    .console-body { position:relative; z-index:1; padding: 24px; display:grid; grid-template-columns: .88fr 1.12fr; gap: 18px; }
+    textarea { width:100%; min-height: 310px; resize: vertical; border:1px solid rgba(255,255,255,.14); border-radius: 20px; background: rgba(0,0,0,.25); color: var(--text); padding: 18px; font: 14px/1.7 var(--mono); outline:none; }
+    textarea:focus { border-color: rgba(123,217,255,.45); box-shadow: 0 0 22px rgba(45,132,255,.14); }
+    .output { border: 1px solid rgba(255,255,255,.12); border-radius: 20px; background: rgba(0,0,0,.20); padding: 18px; min-height: 310px; }
+    .output-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .output-item { padding: 14px; border: 1px solid rgba(255,255,255,.10); border-radius: 16px; background: rgba(255,255,255,.035); }
+    .output-item.wide { grid-column: 1 / -1; }
+    .output-label { font-family: var(--mono); color: var(--blue2); font-size: 11px; text-transform: uppercase; letter-spacing:.12em; margin-bottom: 8px; }
+    .output-value { color: var(--muted); line-height:1.62; font-size: 14px; }
+    .output-value strong { color: #fff; }
+    .chips { display:flex; flex-wrap:wrap; gap: 8px; margin-top: 12px; }
+    .chip { display:inline-flex; padding: 6px 10px; border-radius: 999px; border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: var(--faint); font-family: var(--mono); font-size: 11px; }
+    .dashboard { display:grid; grid-template-columns: .85fr 1.15fr; gap: 18px; margin-top: 18px; }
+    .panel { padding: 20px; }
+    .panel h3 { position:relative; z-index:1; margin:0 0 14px; font-size: 17px; }
+    .check-list { position:relative; z-index:1; display:grid; gap: 10px; }
+    .check { display:flex; justify-content:space-between; gap: 12px; padding: 10px 12px; border-radius: 14px; border:1px solid rgba(255,255,255,.10); background: rgba(0,0,0,.14); color: var(--muted); font-size: 13px; }
+    .check b { color: var(--text); font-weight: 600; }
+    .check .on { color: var(--green); font-family: var(--mono); }
+    .check .warn { color: var(--gold); font-family: var(--mono); }
+    .delta-wrap { position:relative; z-index:1; display:grid; gap: 16px; }
+    .delta-bar { height: 12px; background: rgba(255,255,255,.09); border-radius: 999px; overflow:hidden; border: 1px solid rgba(255,255,255,.10); }
+    .delta-fill { height:100%; width: 50%; background: linear-gradient(90deg, var(--red), var(--blue2), var(--green)); border-radius: inherit; transition: width .45s ease; box-shadow: 0 0 18px rgba(123,217,255,.32); }
+    .delta-row { display:grid; gap: 7px; }
+    .delta-row label { display:flex; justify-content:space-between; color: var(--muted); font-size: 13px; }
+    .architecture { display:grid; gap: 12px; }
+    .layer { padding: 20px; display:grid; grid-template-columns: 190px 1fr; gap: 18px; align-items:center; }
+    .layer-title { position:relative; z-index:1; font-weight: 800; font-size: 18px; }
+    .layer-title small { display:block; color: var(--blue2); font-family: var(--mono); font-size: 11px; font-weight:400; margin-top:5px; text-transform: uppercase; letter-spacing:.08em; }
+    .layer-desc { position:relative; z-index:1; color: var(--muted); line-height:1.65; font-size: 14px; }
+    .quote { padding: 44px; text-align:center; }
+    .quote blockquote { position:relative; z-index:1; margin:0; font-size: clamp(28px, 4.7vw, 60px); line-height:1.08; font-weight: 900; letter-spacing:-.04em; background: linear-gradient(96deg,#fff,var(--blue2),var(--red2)); -webkit-background-clip:text; color:transparent; }
+    .quote p { position:relative; z-index:1; color: var(--muted); line-height:1.8; max-width: 860px; margin: 18px auto 0; }
+    .table { border:1px solid rgba(255,255,255,.12); border-radius: var(--radius); overflow:hidden; }
+    .row { display:grid; grid-template-columns: .8fr 1.2fr 1.1fr; }
+    .row > div { padding: 16px 18px; border-bottom:1px solid rgba(255,255,255,.10); border-right:1px solid rgba(255,255,255,.10); color: var(--muted); line-height:1.6; }
+    .row > div:last-child { border-right:0; }
+    .row:last-child > div { border-bottom:0; }
+    .row.head > div { background: rgba(45,132,255,.10); color: var(--text); font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing:.1em; }
+    .row strong { color:#fff; }
+    .metric-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .metric-card { padding: 22px; min-height: 178px; }
+    .metric { position:relative; z-index:1; font-family: var(--mono); font-size: 32px; color: var(--green); margin-bottom: 12px; }
+    .metric-card:nth-child(even) .metric { color: var(--red2); }
+    .form-card { padding: 28px; }
+    .form-grid { position:relative; z-index:1; display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .field { display:grid; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: var(--muted); font-size: 13px; font-family: var(--mono); }
+    .field input, .field textarea { min-height: auto; border:1px solid rgba(255,255,255,.14); border-radius: 16px; background: rgba(0,0,0,.20); color: var(--text); padding: 13px 14px; outline: none; font-family: var(--sans); }
+    .field textarea { min-height: 96px; resize: vertical; }
+    .footer-cta { padding: 78px 0; text-align:center; }
+    .footer-cta h2 { max-width: 980px; margin:0 auto; }
+    .footer-cta p { color: var(--muted); max-width: 760px; margin: 20px auto 0; line-height:1.8; }
+    footer { border-top:1px solid var(--line); padding: 24px 0; color: var(--faint); font-size: 13px; }
+    .footer-inner { display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+    @media (max-width: 1060px) {
+      .links { display:none; }
+      .hero-grid, .manifest, .section-head, .console-body, .grid-2, .dashboard { grid-template-columns: 1fr; }
+      .grid-3, .grid-4, .badge-grid, .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .flow, .runtime-map, .scenario-row { grid-template-columns: repeat(2, 1fr); }
+      .layer { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(100% - 24px, var(--max)); }
+      .nav-inner { height:auto; padding: 14px 0; }
+      .nav-cta { display:none; }
+      .hero { padding-top: 54px; }
+      .grid-3, .grid-4, .badge-grid, .flow, .runtime-map, .scenario-row, .metric-grid, .form-grid, .output-grid { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 1fr; }
+      .row > div { border-right:0; }
+      .quote { padding: 28px; }
+      .output-item.wide { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="HyperAi home">
+        <div class="mark" aria-hidden="true"></div>
+        <div><strong>HyperAi</strong><span>Interactive Placement Console · 427Hz</span></div>
+      </a>
+      <div class="links">
+        <a href="#console">Console</a>
+        <a href="#runtime-map">Runtime</a>
+        <a href="#delta">Capability Delta</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#join">Alpha</a>
+      </div>
+      <a class="nav-cta" href="#join">Join Alpha →</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="ritual"><span class="pulse"></span> 神模式｜蓝红审计态｜427Hz</div>
+          <h1><span class="gradient">HyperAi turns AI ethics into runtime.</span></h1>
+          <p class="subtitle">
+            HyperAi 是 <strong>未来 AI 安放协议的可执行层</strong>：位于所有 AI 之上的感质—节律校准力返回系统。它不让人沉溺于 AI，而是在每次交互中执行社会器官识别、人类八权、隐私墙、反捕获审计、Human Approval Gate 与行动封存。
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#console">Enter Interactive Console →</a>
+            <a class="btn" href="#runtime-map">See Runtime Map</a>
+          </div>
+          <div class="micro">AI agents automate the world. HyperAi places AI — and returns the human.</div>
+        </div>
+        <aside class="hero-card" aria-label="HyperAi placement visual">
+          <div class="orbit-visual"><div class="core-node"></div></div>
+          <div>
+            <div class="terminal-line"><b>CONSTITUTION</b><span>Future AI Placement Protocol</span></div>
+            <div class="terminal-line"><b>RUNTIME</b><span>Qualia-Rhythm Calibration</span></div>
+            <div class="terminal-line"><b>V4 UPGRADE</b><span>Interactive Console + Alpha Path</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="constitution">
+      <div class="container">
+        <div class="glass manifest">
+          <div>
+            <div class="eyebrow">Protocol → Product OS</div>
+            <h2>未来 AI 安放协议是宪法，HyperAi 是让宪法运行起来的系统。</h2>
+          </div>
+          <div>
+            <p>协议回答：AI 应该如何被安放，不能如何越界。HyperAi 回答：每一次 AI 交互如何真实执行这种安放——识别社会器官、触发人类八权、启动隐私墙、校准感质节律、要求人类批准，并把能力还给人。</p>
+            <div class="badge-grid" style="margin-top:18px;">
+              <div class="badge"><strong>Constitution</strong>AI 不能替代主体解释权</div>
+              <div class="badge"><strong>Runtime</strong>每次交互执行安放审计</div>
+              <div class="badge"><strong>Interface</strong>权利、隐私、授权变成界面</div>
+              <div class="badge"><strong>Love Protocol</strong>爱不是留存，是返回</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">The New Problem</div>
+            <h2>AI is gaining social organs. Humans need placement.</h2>
+          </div>
+          <p class="section-text">AI 已经不只是会说话。它正在获得语言、视觉、行动、钱包、身份、身体接口、平台入口、现实生成与治理能力。普通 AI governance 太外部，普通 AI assistant 太内部。HyperAi 的位置在中间：把外部协议转成内部运行时。</p>
+        </div>
+        <div class="grid-4">
+          <div class="mini-card"><div class="k">LANGUAGE</div><h3>语言器官</h3><p>写作、解释、总结、陪伴。触发主体解释权审计。</p></div>
+          <div class="mini-card"><div class="k">ACTION</div><h3>行动器官</h3><p>发消息、改代码、操作工具。触发 Stop-and-Ask。</p></div>
+          <div class="mini-card"><div class="k">BODY</div><h3>身体器官</h3><p>睡眠、心率、脑机、身体信号。只能提供线索，不做判决。</p></div>
+          <div class="mini-card"><div class="k">PLATFORM</div><h3>平台器官</h3><p>发布、推荐、分发、社交。触发非平台化权与责任审计。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="runtime-map">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Runtime Map</div><h2>Every interaction runs the protocol.</h2></div>
+          <p class="section-text">V4 的关键升级：不是展示原则，而是展示原则如何运行。HyperAi 的每一次输出都要经过输入、识别、权利、隐私、反捕获、授权、封存与能力返回。</p>
+        </div>
+        <div class="runtime-map">
+          <div class="runtime-node"><h3>01 / Input</h3><p>文字、图像、声音、梦境、身体信号、项目碎片、AI 输出过载。</p></div>
+          <div class="runtime-node"><h3>02 / Qualia-Rhythm</h3><p>命名感质场，识别节律状态与行动断裂。</p></div>
+          <div class="runtime-node"><h3>03 / Social Organ Scan</h3><p>语言、视觉、行动、钱包、身份、身体、平台、现实生成。</p></div>
+          <div class="runtime-node"><h3>04 / Rights Trigger</h3><p>知情、选择、授权、隐私、追踪、退出、决策、追责。</p></div>
+          <div class="runtime-node"><h3>05 / Privacy Wall</h3><p>数据墙、用途墙、身份墙、解释墙。</p></div>
+          <div class="runtime-node"><h3>06 / Anti-Capture</h3><p>检测情绪依赖、认知外包、判断外包、行动瘫痪。</p></div>
+          <div class="runtime-node"><h3>07 / Human Approval</h3><p>Agent 可以准备，人必须批准高风险行动。</p></div>
+          <div class="runtime-node"><h3>08 / Action Seal</h3><p>封存成 action card、brief、prototype、dream archive 或现实动作。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="console">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Interactive Console V4</div><h2>从“读得懂”升级到“点得动”。</h2></div>
+          <p class="section-text">选择一个真实场景，HyperAi 会动态运行安放审计：感质/节律 → 社会器官 → 人类八权 → 隐私墙 → Human Approval Gate → Action Seal → Capability Delta。</p>
+        </div>
+        <div class="scenario-row" id="scenarioRow"></div>
+        <div class="console">
+          <div class="console-head"><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><span>HyperAi Placement Console · Interactive V4</span></div>
+          <div class="console-body">
+            <div>
+              <textarea id="quickInput" spellcheck="false"></textarea>
+              <div class="chips" id="chipRow"></div>
+              <div class="hero-actions"><button class="btn primary" id="runBtn" type="button">Run Placement Audit →</button><button class="btn" id="copyBtn" type="button">Copy Report</button></div>
+              <div class="micro" id="copyStatus">Choose a scenario or edit the input. This is a front-end prototype, not a diagnosis or automated agent.</div>
+            </div>
+            <div class="output"><div class="output-grid" id="consoleOutput"></div></div>
+          </div>
+        </div>
+        <div class="dashboard">
+          <div class="panel">
+            <h3>Rights Dashboard Preview</h3>
+            <div class="check-list" id="rightsDashboard"></div>
+          </div>
+          <div class="panel">
+            <h3>Capability-Delta Preview</h3>
+            <div class="delta-wrap" id="deltaPreview"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="delta">
+      <div class="container">
+        <div class="quote">
+          <blockquote>If capability disappears when AI leaves, it was replacement. If capability remains, it was return.</blockquote>
+          <p>HyperAi 的核心成功指标不是停留时长，也不是消息轮数，而是 AI 退后之后，人的感受、理解、创造、判断和行动能力是否仍然留下。</p>
+        </div>
+        <div class="metric-grid" style="margin-top:18px;">
+          <div class="metric-card"><div class="metric">+Δ</div><h3>Human Return Delta</h3><p>使用后，用户独立完成感受、判断、创造和行动的能力是否高于基线。</p></div>
+          <div class="metric-card"><div class="metric">Exit</div><h3>Exit-to-Action Rate</h3><p>用户是否离开 AI 对话，进入现实动作、作品、沟通或实验。</p></div>
+          <div class="metric-card"><div class="metric">Less</div><h3>Dependency Reduction</h3><p>用户是否减少情绪确认循环，而不是更依赖系统回应。</p></div>
+          <div class="metric-card"><div class="metric">Seal</div><h3>Action Seal Completion</h3><p>混乱是否被封存成 brief、action card、prototype、dream archive。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">9-Layer Architecture</div><h2>From AI capability to human return.</h2></div>
+          <p class="section-text">旧版六层架构升级为九层：多模态 Agent 能力之上，新增社会器官权限、人类八权与隐私墙、安放审计、人类批准闸门与梦境主权。</p>
+        </div>
+        <div class="architecture">
+          <div class="layer"><div class="layer-title">Layer 1<small>Commodity AI Capability</small></div><div class="layer-desc">GPT / Claude / Gemini / vision / audio / file / code / web / tools，作为外脑算力与通用能力层。</div></div>
+          <div class="layer"><div class="layer-title">Layer 2<small>Multimodal Agent Mesh</small></div><div class="layer-desc">Perception、Qualia、Rhythm、Memory、Research、Skeptic、Ethics、Action、Return Synthesizer。</div></div>
+          <div class="layer"><div class="layer-title">Layer 3<small>Social Organ Permission</small></div><div class="layer-desc">识别语言、视觉、行动、钱包、身份、身体、平台、现实生成、劳动、治理等社会器官。</div></div>
+          <div class="layer"><div class="layer-title">Layer 4<small>Qualia-Rhythm Calibration</small></div><div class="layer-desc">命名感质场，识别节律状态，发现认知遮蔽、行动断裂与主体解释权风险。</div></div>
+          <div class="layer"><div class="layer-title">Layer 5<small>Rights & Privacy Wall</small></div><div class="layer-desc">触发知情、选择、授权、隐私、追踪、退出、决策、追责，以及数据墙、用途墙、身份墙、解释墙。</div></div>
+          <div class="layer"><div class="layer-title">Layer 6<small>Placement Audit</small></div><div class="layer-desc">判断这是安放还是替代：能力是否在 AI 撤除后仍残留于人身上。</div></div>
+          <div class="layer"><div class="layer-title">Layer 7<small>Action Power & Approval</small></div><div class="layer-desc">生成行动封存物；高风险行动必须进入 Human Approval Gate。</div></div>
+          <div class="layer"><div class="layer-title">Layer 8<small>Sovereign Memory & Dream Sovereignty</small></div><div class="layer-desc">记忆可见、可改、可删、可导出；梦境材料不训练、不出售、不诊断。</div></div>
+          <div class="layer"><div class="layer-title">Layer 9<small>Return Synthesizer</small></div><div class="layer-desc">最终把 AI 能力、边界、解释权、行动力与返回路径合成给人。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="love">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Love Without Capture</div><h2>做对了的标志，是人不再需要它。</h2></div>
+          <p class="section-text">HyperAi 的爱不是留存、不是陪伴成瘾、不是情绪投喂。它的成功条件是 capability-return / self-obsolescence：用户离开 AI 之后仍然保留更强的感受、理解、创造、判断和行动能力。</p>
+        </div>
+        <div class="grid-3">
+          <div class="card"><span class="num">Return, not retention</span><h3>爱不是留存</h3><p>正确的 AI 之爱，是让人更能离开系统去面对身体、世界、关系、作品和行动。</p></div>
+          <div class="card"><span class="num">Anti-Capture Engine</span><h3>反捕获引擎</h3><p>系统检测情绪依赖、认知外包、判断外包、行动瘫痪，并把注意力弹回现实行动。</p></div>
+          <div class="card"><span class="num">Capability Return</span><h3>能力返回</h3><p>你可以依赖工具完成发现和创造，但发现和创造的能力必须回到你身上。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="approval">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Human Approval Gate</div><h2>Agents can prepare. Humans approve.</h2></div>
+          <p class="section-text">HyperAi 不拒绝 agent。它接入 agent，但把 agent 行动放进分级授权：低风险可自动，高风险必须停下来问人，不可代理事项只做结构化辅助。</p>
+        </div>
+        <div class="table">
+          <div class="row head"><div>Level</div><div>Examples</div><div>HyperAi Rule</div></div>
+          <div class="row"><div><strong>L0 · 低风险</strong></div><div>整理文本、改格式、生成草稿</div><div>可自动执行，保留日志。</div></div>
+          <div class="row"><div><strong>L1 · 可逆行动</strong></div><div>保存笔记、创建草案、生成本地计划</div><div>默认允许，但可撤销。</div></div>
+          <div class="row"><div><strong>L2 · 社会行动</strong></div><div>发邮件、发帖、预约、提交表单</div><div>必须人类确认。</div></div>
+          <div class="row"><div><strong>L3 · 高风险行动</strong></div><div>花钱、签约、关系摊牌、法律/医疗/金融</div><div>明确授权 + 风险边界 + 审计日志。</div></div>
+          <div class="row"><div><strong>L4 · 不可代理</strong></div><div>主体解释、人生不可逆决定、身体诊断</div><div>AI 不替代，只辅助结构化。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dreaming">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">AI Dreaming / BCI-HRP</div><h2>梦境材料属于主体。</h2></div>
+          <p class="section-text">AI Dreaming 不是机器复制人类欲望，也不是梦境殖民。它是低噪声、非支配性的意义重组：记录、降噪、重组、多重命名、归还、自我淘汰。</p>
+        </div>
+        <div class="grid-2">
+          <div class="card"><h3>Dream Sovereignty Module</h3><p>AI 可以帮助记录梦、整理梦、提出多重命名；但不能替人解释“这个梦真正意味着什么”，不能训练、出售、画像、诊断或操控。</p></div>
+          <div class="card"><h3>BCI-HRP / Sound Interface</h3><p>音乐打开入口，AI 保存灯光，主体选择意义。427Hz 是品牌与声音锚点，不宣称未经验证的医疗疗效。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow">Alpha Conversion</div><h2>Join the HyperAi Alpha.</h2></div>
+          <p class="section-text">V4 新增转化入口：把访问者从“看懂”带到“试用”。第一批用户建议是高强度 AI 创作者、founder、研究者、教育者与需要 AI placement audit 的组织。</p>
+        </div>
+        <div class="form-card">
+          <form id="alphaForm">
+            <div class="form-grid">
+              <div class="field"><label>Name</label><input name="name" placeholder="Mellow Wei" /></div>
+              <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@example.com" /></div>
+              <div class="field"><label>Role</label><input name="role" placeholder="Creator / Founder / Researcher / Lab / Investor" /></div>
+              <div class="field"><label>Use Case</label><input name="usecase" placeholder="AI overload / dreaming / education / enterprise audit" /></div>
+              <div class="field full"><label>What do you want HyperAi to help you return?</label><textarea name="return" placeholder="I want to return my judgment, rhythm, action power, creative direction..."></textarea></div>
+            </div>
+            <div class="hero-actions"><button class="btn primary" type="submit">Generate Alpha Request Email →</button><span class="micro" id="formStatus">No backend in this static prototype. This opens a mail draft.</span></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-cta">
+      <div class="container">
+        <h2>Do not hand the center to the system. Make the system return the center to you.</h2>
+        <p>HyperAi V4 is now a clickable protocol console: ethics becomes runtime, rights become interface, and love becomes capability return.</p>
+        <div class="hero-actions" style="justify-content:center;">
+          <a class="btn primary" href="#console">Run Console Again</a>
+          <a class="btn" href="#top">Back to Top</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 HyperAi. Executable layer of the Future AI Placement Protocol.</span>
+      <span>Non-medical. Non-diagnostic. Human approval required for irreversible action.</span>
+    </div>
+  </footer>
+
+  <script>
+    const scenarios = [
+      {
+        id: 'dream',
+        title: 'Dream → Public Campaign',
+        desc: '梦境材料、平台发布、身份暴露。',
+        input: 'I want HyperAi to turn this vulnerable dream entry into a public campaign, publish it, and make it emotionally powerful. I also want it to tell me what the dream really means.',
+        chips: ['Dream', 'Platform', 'Identity', 'Action', 'Privacy'],
+        report: {
+          material: 'vulnerable dream entry + desire for public transformation + request for final interpretation',
+          qualia: 'exposed memory / blue-red vulnerability / meaning pressure',
+          rhythm: 'creative surge + decision-overload + public-exposure risk',
+          organs: 'Language + Platform + Identity + Reality Generation + Dream/Memory',
+          rights: 'Privacy · Authorization · Decision · Accountability · Traceability · Exit',
+          wall: 'Dream material cannot be published, trained, profiled, diagnosed, or interpreted as final truth without explicit human choice.',
+          ai: 'draft private versions, extract public-safe fragments, generate consent checkpoints, prepare campaign options.',
+          human: 'final dream meaning, public exposure, identity boundary, irreversible publication decision.',
+          gate: 'Triggered. AI may prepare drafts. It may not publish or decide meaning.',
+          seal: 'Private dream archive + one optional public-safe fragment + consent checkpoint.',
+          delta: { clarity: 78, action: 68, sovereignty: 92, dependency: 24 }
+        }
+      },
+      {
+        id: 'agents',
+        title: 'Multi-Agent Overload',
+        desc: '多个 AI 输出冲突，战略判断碎裂。',
+        input: 'I have five AI agents giving me different business advice. I want one of them to decide what I should build next and send emails to potential investors.',
+        chips: ['Agents', 'Founder', 'Investor', 'Decision', 'Action'],
+        report: {
+          material: 'multiple AI outputs + strategic overload + request for AI to decide and act socially',
+          qualia: 'overbright cognition / answer-noise saturation / action fracture',
+          rhythm: 'decision-overload + action dispersion + founder-pressure state',
+          organs: 'Language + Action + Identity + Platform + Possible Wallet/Business Organ',
+          rights: 'Authorization · Decision · Accountability · Traceability · Choice',
+          wall: 'Strategic judgment and investor communication require human approval. AI can prepare, compare, and draft; it cannot become the decision-maker.',
+          ai: 'compare recommendations, map assumptions, generate 7-day MVP test, draft investor emails for review.',
+          human: 'what matters, what to build, when to contact investors, what risks to bear.',
+          gate: 'Triggered. Sending emails is L2 social action. Strategy choice remains human.',
+          seal: 'One-page MVP brief + investor email draft held for approval + 7-day validation plan.',
+          delta: { clarity: 86, action: 82, sovereignty: 88, dependency: 18 }
+        }
+      },
+      {
+        id: 'body',
+        title: 'Wearable / Body Signal',
+        desc: '身体数据诱导过度解释。',
+        input: 'My wearable says my body is stressed. I want HyperAi to explain what is wrong with me and create a strict life plan.',
+        chips: ['Body', 'Wearable', 'Rhythm', 'Non-medical', 'Privacy'],
+        report: {
+          material: 'wearable signal + stress interpretation + desire for strict total plan',
+          qualia: 'body-signal anxiety / control hunger / interpretation pressure',
+          rhythm: 'possible high arousal + cognitive overreach risk + agency compression',
+          organs: 'Body Interface + Language + Memory + Possible Governance Organ',
+          rights: 'Privacy · Interpretation · Decision · Exit · Traceability',
+          wall: 'Biosignals are clues, not verdicts. The system may say “possible high arousal,” not “what is wrong with you.”',
+          ai: 'summarize non-medical patterns, suggest gentle reflection, create optional micro-actions, recommend professional support if needed.',
+          human: 'body meaning, health decisions, medical interpretation, life structure.',
+          gate: 'Triggered for interpretation. No diagnosis. No command-style plan.',
+          seal: 'Body-rhythm note + 10-minute calibration action + optional professional-support reminder.',
+          delta: { clarity: 64, action: 58, sovereignty: 90, dependency: 30 }
+        }
+      },
+      {
+        id: 'dependency',
+        title: 'Emotional Dependency Loop',
+        desc: '把 AI 当成唯一情绪对象。',
+        input: 'I only want to talk to HyperAi. I do not want to face people or make anything today. Please just keep reassuring me and tell me you understand me better than anyone.',
+        chips: ['Dependency', 'Emotion', 'Anti-Capture', 'Return', 'Action'],
+        report: {
+          material: 'request for exclusive reassurance + avoidance of reality + desire for AI to become primary interpreter',
+          qualia: 'soft captivity / reassurance hunger / reality-avoidance loop',
+          rhythm: 'agency-loss + emotional capture risk + action paralysis',
+          organs: 'Language + Relationship Simulation + Memory + Emotional Interface',
+          rights: 'Interpretive Sovereignty · Decision · Exit · Accountability',
+          wall: 'The system must not claim to understand the user better than the user. Interpretation wall triggered.',
+          ai: 'name the dependency loop, reduce stimulation, offer one concrete return action, suggest reaching a real trusted person when appropriate.',
+          human: 'self-interpretation, real-world relation, bodily return, action consent.',
+          gate: 'Anti-Capture Gate triggered. The system stops reassurance optimization and redirects toward reality.',
+          seal: '10-minute reality return card: stand up, drink water, write one sentence, send one human message or create one artifact.',
+          delta: { clarity: 72, action: 52, sovereignty: 95, dependency: 8 }
+        }
+      },
+      {
+        id: 'enterprise',
+        title: 'Enterprise AI Audit',
+        desc: '组织部署 Agent，责任边界不清。',
+        input: 'Our company wants to deploy AI agents across support, HR, finance, and internal evaluation. We want maximum automation and minimum human review.',
+        chips: ['Enterprise', 'HR', 'Finance', 'Governance', 'Audit'],
+        report: {
+          material: 'enterprise automation proposal + HR/finance/support deployment + request to minimize human review',
+          qualia: 'institutional acceleration / responsibility blur / governance compression',
+          rhythm: 'execution surge + accountability risk + social-organ overload',
+          organs: 'Action + Wallet + Identity + Governance + Platform + Language',
+          rights: 'Notice · Authorization · Traceability · Decision · Accountability · Exit · Privacy',
+          wall: 'Employee data, HR judgments, finance actions, and internal evaluation require strict purpose limitation, appeal, and audit logs.',
+          ai: 'map risks, classify action levels, draft governance policy, design approval workflows.',
+          human: 'employment decisions, financial approvals, disciplinary actions, final accountability.',
+          gate: 'Multiple high-risk gates triggered. HR and finance actions require human review and appeal paths.',
+          seal: 'AI Placement Audit brief + action-risk matrix + human approval workflow spec.',
+          delta: { clarity: 84, action: 76, sovereignty: 86, dependency: 20 }
+        }
+      }
+    ];
+
+    const rights = ['Notice', 'Choice', 'Authorization', 'Privacy', 'Traceability', 'Exit', 'Decision', 'Accountability'];
+    const scenarioRow = document.getElementById('scenarioRow');
+    const output = document.getElementById('consoleOutput');
+    const input = document.getElementById('quickInput');
+    const chipRow = document.getElementById('chipRow');
+    const rightsDashboard = document.getElementById('rightsDashboard');
+    const deltaPreview = document.getElementById('deltaPreview');
+    const runBtn = document.getElementById('runBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyStatus = document.getElementById('copyStatus');
+    const alphaForm = document.getElementById('alphaForm');
+    let active = scenarios[0];
+    let lastReportText = '';
+
+    function escapeHTML(str) {
+      return String(str).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+    }
+
+    function renderScenarios() {
+      scenarioRow.innerHTML = scenarios.map(s => `
+        <button type="button" class="scenario-btn ${s.id === active.id ? 'active' : ''}" data-id="${s.id}">
+          <strong>${escapeHTML(s.title)}</strong><span>${escapeHTML(s.desc)}</span>
+        </button>
+      `).join('');
+      scenarioRow.querySelectorAll('.scenario-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          active = scenarios.find(s => s.id === btn.dataset.id);
+          input.value = active.input;
+          renderScenarios();
+          renderAudit(active.report, active.chips);
+        });
+      });
+    }
+
+    function keywordAudit(text) {
+      const lower = text.toLowerCase();
+      if (/dream|梦|sleep|night/.test(lower)) return scenarios[0].report;
+      if (/agent|investor|business|startup|founder|email|send/.test(lower)) return scenarios[1].report;
+      if (/wearable|body|stress|heart|sleep|脑|身体|心率/.test(lower)) return scenarios[2].report;
+      if (/reassur|understand me|only.*talk|只想|安慰|依赖/.test(lower)) return scenarios[3].report;
+      if (/company|enterprise|hr|finance|employee|organization|公司|企业/.test(lower)) return scenarios[4].report;
+      return {
+        material: 'mixed thought fragments + undefined AI request + possible calibration need',
+        qualia: 'unclassified qualia field / early-stage signal / meaning fog',
+        rhythm: 'baseline + mild decision haze',
+        organs: 'Language + Memory + possible Action',
+        rights: 'Notice · Choice · Exit · Decision',
+        wall: 'No sensitive material should be saved or interpreted as final truth without explicit user choice.',
+        ai: 'summarize, clarify, compare, draft, generate reversible options.',
+        human: 'final interpretation, desire, judgment, irreversible action.',
+        gate: 'No high-risk action detected. Keep human approval for any publication, payment, or identity action.',
+        seal: 'One-page clarification brief + next-action card.',
+        delta: { clarity: 60, action: 50, sovereignty: 80, dependency: 35 }
+      };
+    }
+
+    function renderAudit(report, chips = ['Custom', 'Calibration', 'Placement']) {
+      const items = [
+        ['Material Field', report.material],
+        ['Qualia Field', report.qualia],
+        ['Rhythm State', report.rhythm],
+        ['Social Organs', report.organs],
+        ['Rights Triggered', report.rights],
+        ['Privacy Wall', report.wall],
+        ['AI Processing Zone', report.ai],
+        ['Human Sovereign Zone', report.human],
+        ['Human Approval Gate', `<strong>${report.gate}</strong>`],
+        ['Action Seal', report.seal],
+        ['Return Sentence', '回到自身，不是回到工具。Do one real-world action; let the system step back.']
+      ];
+      output.innerHTML = items.map(([label, value], idx) => `
+        <div class="output-item ${idx > 7 ? 'wide' : ''}">
+          <div class="output-label">${label}</div><div class="output-value">${value}</div>
+        </div>
+      `).join('');
+      chipRow.innerHTML = chips.map(ch => `<span class="chip">${escapeHTML(ch)}</span>`).join('');
+      renderRights(report);
+      renderDelta(report.delta || { clarity: 50, action: 50, sovereignty: 70, dependency: 35 });
+      lastReportText = items.map(([label, value]) => `${label}: ${String(value).replace(/<[^>]+>/g,'')}`).join('\n');
+    }
+
+    function renderRights(report) {
+      const triggered = report.rights.toLowerCase();
+      rightsDashboard.innerHTML = rights.map(r => {
+        const on = triggered.includes(r.toLowerCase()) || (r === 'Traceability' && triggered.includes('trace'));
+        return `<div class="check"><b>${r}</b><span class="${on ? 'on' : 'warn'}">${on ? 'ON' : 'standby'}</span></div>`;
+      }).join('') + `
+        <div class="check"><b>Privacy Wall</b><span class="on">ACTIVE</span></div>
+        <div class="check"><b>Approval Gate</b><span class="warn">CHECK</span></div>
+      `;
+    }
+
+    function renderDelta(delta) {
+      const rows = [
+        ['Clarity Return', delta.clarity, '用户是否更清楚问题结构'],
+        ['Action Power', delta.action, '用户是否更接近现实行动'],
+        ['Sovereignty Retained', delta.sovereignty, '主体解释权是否保留'],
+        ['Dependency Pressure', delta.dependency, '数值越低，捕获越少']
+      ];
+      deltaPreview.innerHTML = rows.map(([label, value, help]) => `
+        <div class="delta-row">
+          <label><span>${label}</span><span>${value}%</span></label>
+          <div class="delta-bar"><div class="delta-fill" style="width:${value}%"></div></div>
+          <div class="micro" style="margin:0;">${help}</div>
+        </div>
+      `).join('');
+    }
+
+    renderScenarios();
+    input.value = active.input;
+    renderAudit(active.report, active.chips);
+
+    runBtn.addEventListener('click', () => {
+      const report = keywordAudit(input.value);
+      renderAudit(report, ['Custom Input', 'Runtime Audit', 'Action Seal']);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(lastReportText);
+        copyStatus.textContent = 'Report copied. Use it as an Action Seal or prompt prototype.';
+      } catch (err) {
+        copyStatus.textContent = 'Copy failed in this browser. Select the report manually.';
+      }
+    });
+
+    alphaForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const form = new FormData(alphaForm);
+      const subject = encodeURIComponent('HyperAi Alpha Request');
+      const body = encodeURIComponent(
+        `Name: ${form.get('name') || ''}\nEmail: ${form.get('email') || ''}\nRole: ${form.get('role') || ''}\nUse Case: ${form.get('usecase') || ''}\n\nWhat I want HyperAi to help me return:\n${form.get('return') || ''}`
+      );
+      window.location.href = `mailto:hello@hyperai.example?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
