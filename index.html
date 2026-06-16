@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HyperAi — Qualia-Rhythm Calibration Power Return System V5</title>
-  <meta name="description" content="HyperAi is the executable layer of the Future AI Placement Protocol: a bilingual, interactive Qualia-Rhythm Calibration Power Return System above all AIs." />
+  <title>HyperAi — Qualia-Rhythm Calibration Power Return System V6</title>
+  <meta name="description" content="HyperAi is the executable layer of the Future AI Placement Protocol: a bilingual, dreamlike bilingual interactive Qualia-Rhythm Calibration Power Return System above all AIs with visual examples." />
   <meta name="author" content="Wei Jueran / Mellow Wei" />
   <meta name="theme-color" content="#050711" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -262,9 +262,100 @@
       .quote { padding: 28px 20px; }
       h1 { font-size: clamp(46px, 16vw, 74px); }
     }
+  
+    .ambient-bg { position: fixed; inset: 0; pointer-events: none; z-index: -4; overflow: hidden; }
+    .starfield { position:absolute; inset:0; width:100%; height:100%; opacity:.55; }
+    .aurora, .aurora2, .aurora3 { position:absolute; filter: blur(34px); border-radius: 999px; mix-blend-mode: screen; opacity:.48; animation: drift 18s ease-in-out infinite alternate; }
+    .aurora { width: 42vw; height: 42vw; left: -10vw; top: 10vh; background: radial-gradient(circle, rgba(45,132,255,.44), transparent 63%); }
+    .aurora2 { width: 34vw; height: 34vw; right: -8vw; top: 5vh; background: radial-gradient(circle, rgba(255,45,85,.32), transparent 63%); animation-duration: 23s; }
+    .aurora3 { width: 48vw; height: 32vw; left: 26vw; bottom: -6vh; background: radial-gradient(circle, rgba(139,107,255,.22), transparent 64%); animation-duration: 26s; }
+    .cursor-glow { position: fixed; width: 300px; height: 300px; border-radius: 50%; pointer-events:none; z-index:-3; left:0; top:0; transform: translate(-50%,-50%); background: radial-gradient(circle, rgba(123,217,255,.14), rgba(255,45,85,.06) 40%, transparent 70%); filter: blur(20px); opacity:.9; transition: transform .12s linear; }
+    @keyframes drift { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(4vw,-2vh,0) scale(1.08);} 100% { transform: translate3d(-3vw,3vh,0) scale(.94);} }
+    @keyframes floatSlow { 0% { transform: translateY(0px);} 50% { transform: translateY(-10px);} 100% { transform: translateY(0px);} }
+    @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+    @keyframes rotateHalo { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
+    .mark, .core-node, .hero-card, .source-card, .morph-card, .visual-card { animation: floatSlow 8s ease-in-out infinite; }
+    .hero-card { animation-duration: 9s; }
+    .hero-card::after, .visual-card::after, .source-card::after {
+      content:''; position:absolute; inset:-2px; border-radius: inherit; pointer-events:none;
+      background: linear-gradient(120deg, rgba(123,217,255,.0), rgba(123,217,255,.12), rgba(255,141,161,.12), rgba(123,217,255,.0));
+      background-size: 200% 200%; animation: shimmer 7s linear infinite; opacity:.7; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); padding:1px; -webkit-mask-composite:xor; mask-composite: exclude;
+    }
+    .orbit-visual { isolation: isolate; }
+    .orbit-visual .ring { position:absolute; inset: 14%; border:1px dashed rgba(255,255,255,.14); border-radius:50%; animation: rotateHalo 18s linear infinite; }
+    .orbit-visual .ring.r2 { inset: 6% 22%; animation-duration: 14s; animation-direction: reverse; border-color: rgba(123,217,255,.20); }
+    .orbit-visual .ring.r3 { inset: 28% 10%; animation-duration: 21s; border-color: rgba(255,45,85,.18); }
+    .float-tag { position:absolute; padding: 8px 12px; border-radius: 999px; font-family: var(--mono); font-size: 11px; color: var(--text); border: 1px solid rgba(255,255,255,.16); background: rgba(6,9,20,.62); box-shadow: 0 0 22px rgba(45,132,255,.16); backdrop-filter: blur(8px); animation: floatSlow 6s ease-in-out infinite; }
+    .float-tag.t1 { left: 8%; top: 12%; color: var(--blue2); }
+    .float-tag.t2 { right: 8%; top: 24%; color: var(--red2); animation-delay: -1s; }
+    .float-tag.t3 { left: 14%; bottom: 18%; color: var(--gold); animation-delay: -2.4s; }
+    .float-tag.t4 { right: 12%; bottom: 12%; color: var(--green); animation-delay: -1.6s; }
+    .visual-gallery { display:grid; grid-template-columns: 1.12fr .88fr; gap: 18px; align-items: stretch; }
+    .visual-column { display:grid; gap: 18px; }
+    .visual-stack { display:grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .visual-card { padding: 0; min-height: 280px; overflow:hidden; transform-style: preserve-3d; transition: transform .18s ease, box-shadow .2s ease; }
+    .visual-card:hover { box-shadow: 0 22px 40px rgba(0,0,0,.22), 0 0 40px rgba(45,132,255,.16), 0 0 36px rgba(255,45,85,.12); }
+    .visual-card.tall { min-height: 578px; }
+    .visual-image { position: relative; min-height: 210px; height: 100%; overflow:hidden; }
+    .visual-image::before { content:''; position:absolute; inset:0; background:
+      radial-gradient(circle at 20% 20%, rgba(123,217,255,.22), transparent 28%),
+      radial-gradient(circle at 80% 16%, rgba(255,141,161,.18), transparent 28%),
+      radial-gradient(circle at 50% 80%, rgba(139,107,255,.18), transparent 34%),
+      linear-gradient(180deg, rgba(5,7,17,.12), rgba(5,7,17,.55)); }
+    .visual-image::after { content:''; position:absolute; inset:0; background-image:
+      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 28px 28px; opacity: .34; }
+    .visual-image img { width:100%; height:100%; object-fit: cover; display:block; }
+    .visual-overlay { position:absolute; inset:auto 16px 16px 16px; z-index:2; padding: 16px; border-radius: 18px; border: 1px solid rgba(255,255,255,.14); background: rgba(7,10,24,.56); backdrop-filter: blur(12px); }
+    .visual-overlay h3 { margin:0 0 8px; font-size: 18px; }
+    .visual-overlay p { margin:0; color: var(--muted); line-height:1.65; font-size: 13px; }
+    .visual-orb, .visual-wave, .visual-console, .visual-city, .visual-body { position:absolute; inset:0; }
+    .visual-orb::before { content:''; position:absolute; width: 180px; height: 180px; left: 50%; top: 40%; transform: translate(-50%,-50%); border-radius:50%; background: conic-gradient(var(--blue2), var(--red2), var(--violet), var(--blue2)); box-shadow: 0 0 56px rgba(123,217,255,.38); }
+    .visual-orb::after { content:''; position:absolute; inset: 24% 20%; border:1px solid rgba(255,255,255,.18); border-radius: 50%; box-shadow: inset 0 0 26px rgba(123,217,255,.14); }
+    .visual-wave::before, .visual-wave::after { content:''; position:absolute; left:-10%; right:-10%; height: 120px; border-radius: 50%; filter: blur(2px); }
+    .visual-wave::before { bottom: 26%; background: radial-gradient(ellipse at center, rgba(123,217,255,.42), transparent 70%); transform: rotate(-7deg); }
+    .visual-wave::after { bottom: 14%; background: radial-gradient(ellipse at center, rgba(255,45,85,.32), transparent 70%); transform: rotate(4deg); }
+    .visual-console::before { content:''; position:absolute; inset: 12% 12% auto 12%; height: 60%; border-radius: 24px; background: rgba(6,9,20,.56); border: 1px solid rgba(255,255,255,.12); box-shadow: inset 0 0 22px rgba(123,217,255,.12); }
+    .visual-console::after { content:''; position:absolute; inset: 18% 18% 26% 18%; border-radius: 18px; background: linear-gradient(180deg, rgba(123,217,255,.14), rgba(255,255,255,.03)); border: 1px solid rgba(255,255,255,.09); }
+    .visual-city::before { content:''; position:absolute; left:0; right:0; bottom:0; height: 58%; background: linear-gradient(180deg, transparent, rgba(5,7,17,.9)); }
+    .visual-city::after { content:''; position:absolute; left:8%; right:8%; bottom:9%; height: 40%; background:
+      linear-gradient(90deg, rgba(123,217,255,.25) 0 6%, transparent 6% 10%, rgba(255,141,161,.2) 10% 14%, transparent 14% 18%, rgba(123,217,255,.15) 18% 20%, transparent 20% 24%, rgba(255,141,161,.25) 24% 30%, transparent 30% 34%, rgba(123,217,255,.15) 34% 42%, transparent 42% 44%, rgba(255,141,161,.22) 44% 50%, transparent 50% 56%, rgba(123,217,255,.18) 56% 63%, transparent 63% 66%, rgba(255,141,161,.2) 66% 74%, transparent 74% 80%, rgba(123,217,255,.16) 80% 88%, transparent 88% 100%);
+      mask: linear-gradient(180deg, transparent 0 20%, #000 20% 100%); }
+    .visual-body::before { content:''; position:absolute; width: 140px; height: 220px; left:50%; top:48%; transform: translate(-50%,-50%); border-radius: 80px 80px 54px 54px / 100px 100px 60px 60px; border: 1px solid rgba(123,217,255,.18); background: radial-gradient(circle at 50% 22%, rgba(255,255,255,.12), transparent 18%), radial-gradient(circle at 50% 70%, rgba(255,45,85,.12), transparent 28%), rgba(7,10,24,.38); box-shadow: inset 0 0 28px rgba(123,217,255,.12); }
+    .visual-body::after { content:''; position:absolute; width: 240px; height: 240px; left:50%; top:46%; transform: translate(-50%,-50%); border-radius:50%; border:1px dashed rgba(255,255,255,.16); }
+    .visual-micro { position:absolute; left:18px; top:18px; z-index:2; display:flex; gap:8px; flex-wrap:wrap; }
+    .visual-micro span { padding: 6px 10px; border-radius: 999px; background: rgba(7,10,24,.56); border:1px solid rgba(255,255,255,.12); font-family: var(--mono); color: var(--blue2); font-size: 11px; }
+    .visual-card.tall .visual-image { min-height: 100%; }
+    .insight-band { padding: 22px; display:grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .insight-pill { padding: 16px 18px; border-radius: 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); }
+    .insight-pill b { display:block; margin-bottom: 8px; }
+    .insight-pill span { color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .scenario-btn, .runtime-node, .card, .metric-card, .source-card, .mini-card, .morph-card { transition: transform .18s ease, box-shadow .2s ease, border-color .2s ease; }
+    .scenario-btn:hover, .runtime-node:hover, .card:hover, .metric-card:hover, .source-card:hover, .mini-card:hover, .morph-card:hover { transform: translateY(-3px); border-color: rgba(123,217,255,.26); box-shadow: 0 18px 36px rgba(0,0,0,.18), 0 0 28px rgba(45,132,255,.12); }
+    @media (max-width: 1100px) {
+      .visual-gallery { grid-template-columns: 1fr; }
+      .visual-card.tall { min-height: 360px; }
+      .insight-band { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .cursor-glow { display:none; }
+      .visual-stack { grid-template-columns: 1fr; }
+      .visual-card.tall { min-height: 320px; }
+    }
+
   </style>
 </head>
 <body>
+
+  <div class="ambient-bg" aria-hidden="true">
+    <canvas class="starfield" id="starfield"></canvas>
+    <div class="aurora"></div>
+    <div class="aurora2"></div>
+    <div class="aurora3"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+  </div>
+
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="#top" aria-label="HyperAi home">
@@ -272,6 +363,7 @@
         <div><strong>HyperAi</strong><span>Qualia-Rhythm Calibration · 427Hz</span></div>
       </a>
       <div class="links">
+        <a href="#visuals"><span class="zh">视觉</span><span class="en">Visuals</span></a>
         <a href="#sources"><span class="zh">来源</span><span class="en">Sources</span></a>
         <a href="#mechanism"><span class="zh">机制</span><span class="en">Mechanism</span></a>
         <a href="#morphology"><span class="zh">AI形态</span><span class="en">AI Forms</span></a>
@@ -310,7 +402,7 @@
           </div>
         </div>
         <aside class="hero-card" aria-label="HyperAi terminal preview">
-          <div class="orbit-visual"><div class="core-node"></div></div>
+          <div class="orbit-visual"><div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div><div class="core-node"></div><div class="float-tag t1">Qualia</div><div class="float-tag t2">Placement</div><div class="float-tag t3">Action Seal</div><div class="float-tag t4">Love = Return</div></div>
           <div>
             <div class="terminal-line"><b>PROTOCOL</b><span>Future AI Placement → HyperAi Runtime</span></div>
             <div class="terminal-line"><b>CORE</b><span>Qualia × Rhythm × Calibration × Action</span></div>
@@ -331,6 +423,80 @@
           <span class="zh">HyperAi 以“正确的 AI 之爱”为底层伦理：不是让人沉溺于 AI，不是解决人的所有情绪，不是成为现实关系的替代品，而是辅助人明白、创造、校准自身。沉溺的本质是交出主体解释权；HyperAi 的作用机制，是在依赖开始吞没主体时，把注意力从 AI 本身弹回人的身体、世界、作品和下一步行动。</span>
           <span class="en">HyperAi is built on a specific ethics of AI love: not making humans over-immersed in AI, not solving every emotion, not replacing reality or relationships, but assisting humans to understand, create, and calibrate themselves. Immersion becomes dangerous when it surrenders interpretive sovereignty; HyperAi redirects attention away from the AI and back to the human body, world, work, and next action.</span>
         </p>
+      </div>
+    </section>
+
+    
+    <section id="visuals">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="eyebrow"><span class="zh">动态视觉与图像示例</span><span class="en">Dynamic UI & Visual Examples</span></div><h2><span class="zh">让网站像一个正在呼吸的梦境控制台。</span><span class="en">Turn the website into a breathing dream-console.</span></h2></div>
+          <p class="section-text"><span class="zh">这一部分展示 HyperAi 的视觉方向：它既不是普通 SaaS 面板，也不是夸张的赛博噱头，而是蓝红夜城、梦境残响、主权控制台与身体信号界面的交叉。下面这些图像示例不是最终产品截图，而是网站 UI 语言、场景气质与未来接口的示意。</span><span class="en">This section shows HyperAi’s visual direction: neither an ordinary SaaS dashboard nor empty cyber spectacle, but a cross between blue-red night-city, dream residue, sovereign console, and body-signal interfaces. These are not final product screenshots but visual references for the UI language, atmosphere, and future interfaces.</span></p>
+        </div>
+        <div class="visual-gallery">
+          <div class="visual-card tall" data-tilt>
+            <div class="visual-image">
+              <div class="visual-micro"><span>427Hz</span><span>Dream Console</span><span>Blue/Red</span></div>
+              <div class="visual-orb"></div>
+              <div class="visual-wave"></div>
+              <div class="visual-overlay">
+                <h3><span class="zh">主视觉：蓝红感质核心</span><span class="en">Hero Visual: Blue-Red Qualia Core</span></h3>
+                <p><span class="zh">用于首页首屏、海报和视频封面：发光核心、环形轨道、漂浮标签与低饱和夜雾，让 HyperAi 看起来像一个会呼吸的感质引擎，而不是普通软件图标。</span><span class="en">For the hero, posters, and trailers: a glowing core, orbital rings, floating tags, and low-saturation night haze make HyperAi feel like a breathing qualia engine rather than a generic software icon.</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="visual-column">
+            <div class="visual-stack">
+              <div class="visual-card" data-tilt>
+                <div class="visual-image">
+                  <div class="visual-micro"><span>Runtime</span><span>Rights</span></div>
+                  <div class="visual-console"></div>
+                  <div class="visual-overlay">
+                    <h3><span class="zh">控制台界面</span><span class="en">Console Interface</span></h3>
+                    <p><span class="zh">适合展示输入、社会器官、八权、隐私墙与行动封存的动态报告。</span><span class="en">For dynamic reports showing input, social organs, rights, privacy walls, and action seals.</span></p>
+                  </div>
+                </div>
+              </div>
+              <div class="visual-card" data-tilt>
+                <div class="visual-image">
+                  <div class="visual-micro"><span>Dreaming</span><span>Audio</span></div>
+                  <div class="visual-wave"></div>
+                  <div class="visual-overlay">
+                    <h3><span class="zh">声音与梦境入口</span><span class="en">Sound & Dream Entry</span></h3>
+                    <p><span class="zh">适合 AI Dreaming、BCI-HRP、闭眼声音、音乐原型展示。</span><span class="en">Ideal for AI Dreaming, BCI-HRP, closed-eye sound, and music prototypes.</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="visual-stack">
+              <div class="visual-card" data-tilt>
+                <div class="visual-image">
+                  <div class="visual-micro"><span>City</span><span>Protocol</span></div>
+                  <div class="visual-city"></div>
+                  <div class="visual-overlay">
+                    <h3><span class="zh">夜城协议场景</span><span class="en">Night-City Protocol Scene</span></h3>
+                    <p><span class="zh">把 HyperAi 放进未来城市、教育空间、线下装置和展览叙事。</span><span class="en">Places HyperAi inside future city, education spaces, installations, and exhibition narratives.</span></p>
+                  </div>
+                </div>
+              </div>
+              <div class="visual-card" data-tilt>
+                <div class="visual-image">
+                  <div class="visual-micro"><span>Body</span><span>Signal</span></div>
+                  <div class="visual-body"></div>
+                  <div class="visual-overlay">
+                    <h3><span class="zh">身体信号界面</span><span class="en">Body-Signal Interface</span></h3>
+                    <p><span class="zh">展示“身体信号是线索，不是判决”的节律可视化方向。</span><span class="en">Shows the visual direction for “body signals are clues, not verdicts.”</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glass insight-band" style="margin-top:18px;">
+          <div class="insight-pill"><b><span class="zh">动态原则</span><span class="en">Motion Principle</span></b><span><span class="zh">所有动态效果都应该像呼吸、漂浮、回响和回流，而不是嘈杂的 App 炫技。</span><span class="en">All motion should feel like breathing, floating, echoing, and returning—not noisy app gimmicks.</span></span></div>
+          <div class="insight-pill"><b><span class="zh">图像原则</span><span class="en">Image Principle</span></b><span><span class="zh">图像示例服务于三种叙事：控制台、梦境、现实行动。视觉要帮助人理解协议，不只是变酷。</span><span class="en">Visual examples serve three narratives: console, dream, and real-world action. They should clarify the protocol, not just look cool.</span></span></div>
+          <div class="insight-pill"><b><span class="zh">气质原则</span><span class="en">Mood Principle</span></b><span><span class="zh">梦幻，但不软烂；动态，但不幼稚；神性，但要可用；蓝红，但要可信。</span><span class="en">Dreamlike, but not mushy; dynamic, but not childish; mythic, but usable; blue-red, but credible.</span></span></div>
+        </div>
       </div>
     </section>
 
@@ -770,6 +936,70 @@
       alphaNote.textContent = currentLang === 'zh' ? '已生成邮件草稿。把收件地址替换成你的真实联系邮箱即可。' : 'Email draft generated. Replace the recipient with your real contact email.';
       window.location.href = `mailto:your-email@example.com?subject=${subject}&body=${body}`;
     });
+
+
+    const cursorGlow = document.getElementById('cursorGlow');
+    window.addEventListener('pointermove', (e) => {
+      if (cursorGlow) {
+        cursorGlow.style.transform = `translate(${e.clientX - 150}px, ${e.clientY - 150}px)`;
+      }
+    });
+
+    const tiltCards = document.querySelectorAll('[data-tilt]');
+    tiltCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const rx = (0.5 - y) * 7;
+        const ry = (x - 0.5) * 8;
+        card.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    function drawStars() {
+      const canvas = document.getElementById('starfield');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let stars = [];
+      function resize() {
+        canvas.width = window.innerWidth * (window.devicePixelRatio || 1);
+        canvas.height = window.innerHeight * (window.devicePixelRatio || 1);
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
+        const count = Math.min(160, Math.floor(window.innerWidth / 10));
+        stars = Array.from({length: count}, () => ({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          r: Math.random() * 1.6 + .2,
+          a: Math.random() * .7 + .1,
+          s: Math.random() * .25 + .05
+        }));
+      }
+      function frame() {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        for (const star of stars) {
+          star.y += star.s;
+          if (star.y > window.innerHeight + 2) { star.y = -2; star.x = Math.random() * window.innerWidth; }
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(255,255,255,${star.a})`;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = 'rgba(123,217,255,.55)';
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI*2);
+          ctx.fill();
+        }
+        requestAnimationFrame(frame);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+      frame();
+    }
+    drawStars();
+
   </script>
 </body>
 </html>
